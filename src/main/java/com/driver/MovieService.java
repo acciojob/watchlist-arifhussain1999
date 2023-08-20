@@ -1,6 +1,7 @@
 package com.driver;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,25 +14,25 @@ public class MovieService {
     @Autowired
     MovieRepository movieRepository;
 
-    public String addMovie(Movie movie)
+    public void addMovie(Movie movie)
     {
         Map<String,Movie> movieDB=movieRepository.getMovieDB();
         String primaryKey=movie.getName();
         movieDB.put(primaryKey,movie);
-        return "Movie added successfully";
+        return;
     }
 
-    public String addDirector(Director director)
+    public void addDirector(Director director)
     {
         Map<String,Director> directorDB=movieRepository.getDirectorDB();
         String primaryKey=director.getName();
         directorDB.put(primaryKey,director);
-        return "Director added successfully";
+       return;
     }
 
-    public String addMovieDirectorPair(String movieName, String directorName)
+    public void addMovieDirectorPair(String movieName, String directorName)
     {
-      return addMovieDirectorPair(movieName,directorName);
+       movieRepository.addMovieDirectorPair(movieName,directorName);
     }
 
     public Movie getMovieByName(String movieName) {
@@ -53,14 +54,8 @@ public class MovieService {
         return movieName;
     }
 
-    public List<Movie> findAllMovies() {
-        Map<String,Movie> movieDB=movieRepository.getMovieDB();
-        List<Movie> list = new ArrayList<>();
-        for(String key : movieDB.keySet())
-        {
-            list.add(movieDB.get(key));
-        }
-        return list;
+    public List<String> findAllMovies() {
+       return movieRepository.findAllMovies();
     }
 
     public String deleteDirectorByName(String directorName) {

@@ -19,13 +19,6 @@ Map<String,List<Movie>> pairDB=new HashMap<>();
         return directorDB;
     }
 
-    public Map<String, List<Movie>> getPairDB() {
-        return pairDB;
-    }
-
-
-
-
 
 
     public Map<String, Movie> getMovieDB() {
@@ -33,13 +26,31 @@ Map<String,List<Movie>> pairDB=new HashMap<>();
     }
 
 
-    public String addMovieDirectorPair(String movieName, String directorName)
+    public void addMovieDirectorPair(String movieName, String directorName)
     {
-       Movie movieObj=movieDB.get(movieName);
-       List<Movie> listMovie=pairDB.getOrDefault(directorName,new ArrayList<>());
-       listMovie.add(movieObj);
-       pairDB.put(directorName,listMovie);
-      return "Pair added successfully";
+        Movie movie= movieDB.get(movieName);
+        if(movie!=null && directorDB.containsKey(directorName)) {
+            List<Movie> movieList = pairDB.getOrDefault(directorName,new ArrayList<>());
+            movieList.add(movie);
+            pairDB.put(directorName,movieList);
+        }
+return;
+    }
+
+    public void setMovieDB(Map<String, Movie> movieDB) {
+        this.movieDB = movieDB;
+    }
+
+    public void setDirectorDB(Map<String, Director> directorDB) {
+        this.directorDB = directorDB;
+    }
+
+    public Map<String, List<Movie>> getPairDB() {
+        return pairDB;
+    }
+
+    public void setPairDB(Map<String, List<Movie>> pairDB) {
+        this.pairDB = pairDB;
     }
 
     public Movie getMovieByName(String movieName) {
@@ -54,5 +65,9 @@ Map<String,List<Movie>> pairDB=new HashMap<>();
         movieDB.clear();
         directorDB.clear();
         return "All movies and directors deleted successfully";
+    }
+
+    public List<String> findAllMovies() {
+        return new ArrayList<>(movieDB.keySet());
     }
 }
