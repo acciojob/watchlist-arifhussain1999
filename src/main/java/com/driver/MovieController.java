@@ -24,7 +24,7 @@ public class MovieController {
 }
 
 @PutMapping("/add-movie-director-pair")
-public String addMovieDirectorPair(@RequestParam("m") String movieName,@RequestParam("d") String directorName){
+public String addMovieDirectorPair(@RequestParam String movieName,@RequestParam String directorName){
     return movieService.addMovieDirectorPair(movieName,directorName);
 }
 
