@@ -44,27 +44,18 @@ public class MovieService {
     }
 
     public List<String> getMoviesByDirectorName(String directorName) {
-        Map<String,List<Movie>> movieList=movieRepository.getPairDB();
-        List<String> movieName=new ArrayList<>();
-        List<Movie> Film=movieList.get(directorName);
-        for(Movie movie:Film)
-        {
-            movieName.add(movie.getName());
-        }
-        return movieName;
+        return movieRepository.getMoviesByDirectorName(directorName);
     }
 
     public List<String> findAllMovies() {
        return movieRepository.findAllMovies();
     }
 
-    public String deleteDirectorByName(String directorName) {
-        Map<String,List<Movie>> pairDB=movieRepository.getPairDB();
-        pairDB.remove(directorName);
-        return "Director and it's movies deleted successfully";
+    public void deleteDirectorByName(String directorName) {
+         movieRepository.deleteDirectorByName(directorName);
     }
 
-    public String deleteAllDirectors() {
-        return movieRepository.deleteAllDirectors();
+    public void deleteAllDirectors() {
+         movieRepository.deleteAllDirectors();
     }
 }

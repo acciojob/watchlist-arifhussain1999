@@ -61,13 +61,44 @@ return;
         return  directorDB.get(directorName);
     }
 
-    public String deleteAllDirectors() {
-        movieDB.clear();
+    public void deleteAllDirectors() {
+        for(List<Movie> movieList : pairDB.values()){
+            for(Movie movie : movieList){
+               String movieName=movie.getName();
+               movieDB.remove(movieName);
+            }
+        }
         directorDB.clear();
-        return "All movies and directors deleted successfully";
+        pairDB.clear();
     }
 
     public List<String> findAllMovies() {
         return new ArrayList<>(movieDB.keySet());
+    }
+
+    public List<String> getMoviesByDirectorName(String directorName) {
+
+        List<String> movieName=new ArrayList<>();
+        if(pairDB.containsKey(directorName)){
+            List<Movie> Film=pairDB.get(directorName);
+            for(Movie movie: Film)
+            {
+                movieName.add(movie.getName());
+            }
+        }
+        return movieName;
+    }
+
+    public void deleteDirectorByName(String directorName) {
+
+        if(pairDB.containsKey(directorName)){
+            List<Movie> movieList =pairDB.get(directorName);
+            for(Movie movie : movieList){
+                String movieName=movie.getName();
+                movieDB.remove(movieName);
+            }
+        }
+        pairDB.remove(directorName);
+        directorDB.remove(directorName);
     }
 }

@@ -67,6 +67,6 @@ public ResponseEntity<Movie> getMovieByName(@PathVariable("name") String movieNa
 public ResponseEntity<String> deleteAllDirectors(){
 
      movieService.deleteAllDirectors();
-    return new ResponseEntity<>("Movies deleted successfully!", HttpStatus.OK);
+    return new ResponseEntity<>("All movies deleted of every director successfully!", HttpStatus.OK);
 }
 }
