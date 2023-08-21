@@ -60,6 +60,7 @@ public ResponseEntity<Movie> getMovieByName(@PathVariable("name") String movieNa
 
 @DeleteMapping("delete-director-by-name")
     public ResponseEntity<String> deleteDirectorByName(@RequestParam("name") String directorName){
+    movieService.deleteDirectorByName(directorName);
     return new ResponseEntity<>("Movies deleted successfully!", HttpStatus.OK);
 }
 
